@@ -1,17 +1,33 @@
 name := """lv-fox"""
 organization := "net.yoshinorin"
-
-version := "1.0-SNAPSHOT"
-
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
-
+version := "0.0.1"
 scalaVersion := "2.13.2"
 
-libraryDependencies += guice
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
+scalacOptions ++= Seq(
+  "-Yrangepos",
+  "-Ywarn-unused",
+  "-deprecation",
+  "-feature",
+  "-unchecked",
+  "-encoding",
+  "UTF-8"
+)
 
-// Adds additional packages into Twirl
-//TwirlKeys.templateImports += "net.yoshinorin.controllers._"
-
-// Adds additional packages into conf/routes
-// play.sbt.routes.RoutesKeys.routesImport += "net.yoshinorin.binders._"
+val circeVersion = "0.13.0"
+lazy val root = (project in file("."))
+  .settings(
+    libraryDependencies ++= Seq(
+      "ch.qos.logback" % "logback-classic" % "1.2.3",
+      "com.typesafe" % "config" % "1.4.0",
+      "io.circe" %% "circe-core" % circeVersion,
+      "io.circe" %% "circe-generic" % circeVersion,
+      "io.circe" %% "circe-parser" % circeVersion,
+      "io.getquill" %% "quill-jdbc" % "3.5.1",
+      "org.flywaydb" % "flyway-core" % "6.4.1",
+      "org.mariadb.jdbc" % "mariadb-java-client" % "2.6.0",
+      "org.slf4j" % "slf4j-api" % "1.7.29",
+      "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test,
+      guice
+    )
+  )
+  .enablePlugins(PlayScala)
