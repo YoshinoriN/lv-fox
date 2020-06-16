@@ -6,7 +6,9 @@ import play.api.ApplicationLoader.Context
 class LvFoxLoader extends ApplicationLoader {
 
   def load(context: Context): Application = {
-    new LvFoxComponents(context).application
+    val lvFoxComponents: LvFoxComponents = new LvFoxComponents(context)
+    lvFoxComponents.dbMigration.migrate()
+    lvFoxComponents.application
   }
 
 }
