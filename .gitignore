@@ -32,3 +32,4 @@ docker/data
 docker/config
 
 */.g8/*
+.sbtops
