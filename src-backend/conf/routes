@@ -1,1 +1,3 @@
 GET     /                           controllers.StatusController.index
+GET     /page                       controllers.PageController.search
+POST    /page                       controllers.PageController.upsert

@@ -1,6 +1,6 @@
 package components
 
-import controllers.StatusController
+import controllers.{PageController, StatusController}
 import modules.ErrorHandler
 import play.api.mvc.EssentialFilter
 import play.api.routing.Router
@@ -12,10 +12,12 @@ class LvFoxComponents(context: ApplicationLoader.Context) extends BuiltInCompone
 
   private val errorHandler = new ErrorHandler
   private val statusController: StatusController = new StatusController(controllerComponents)
+  private val pageController: PageController = new PageController(controllerComponents)
 
   override def router: Router = new Routes(
     errorHandler,
-    statusController
+    statusController,
+    pageController
   )
 
   override def httpFilters: Seq[EssentialFilter] = super.httpFilters
