@@ -6,11 +6,11 @@ import services.PagesService
 
 class PageController @Inject()(controllerComponents: ControllerComponents, pagesService: PagesService) extends AbstractController(controllerComponents) {
 
-  def search() = Action { implicit request: Request[AnyContent] =>
+  def search(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     Ok("{\"status\":\"todo - get\"}").as(JSON)
   }
 
-  def upsert = Action { implicit request: Request[AnyContent] =>
+  def upsert: Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     Ok("{\"status\":\"todo - post\"}").as(JSON)
   }
 }
