@@ -1,10 +1,17 @@
 package controllers
 
 import javax.inject.Inject
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Request}
+import models.pages.Pages
+import play.api.mvc._
+import play.api.libs.circe
 import services.PagesService
+import io.circe.syntax._
+import io.circe.generic.auto._
+import play.api.libs.circe.Circe
 
-class PageController @Inject()(controllerComponents: ControllerComponents, pagesService: PagesService) extends AbstractController(controllerComponents) {
+class PageController @Inject()(controllerComponents: ControllerComponents, pagesService: PagesService)
+    extends AbstractController(controllerComponents)
+    with Circe {
 
   // TODO: CORS, Auth(with Action)
   def search(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
@@ -12,7 +19,7 @@ class PageController @Inject()(controllerComponents: ControllerComponents, pages
   }
 
   // TODO: Auth(with Action), IpFilter(With Action), replace ignore Chars(with Action)
-  def upsert: Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+  def upsert: Action[Pages] = Action(circe.json[Pages]) { implicit request =>
     Ok("{\"status\":\"todo - post\"}").as(JSON)
   }
 }

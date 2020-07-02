@@ -22,6 +22,7 @@ lazy val root = (project in file("."))
       "io.circe" %% "circe-core" % circeVersion,
       "io.circe" %% "circe-generic" % circeVersion,
       "io.circe" %% "circe-parser" % circeVersion,
+      "com.dripower" %% "play-circe" % "2812.0",
       "io.getquill" %% "quill-jdbc" % "3.5.1",
       "org.flywaydb" % "flyway-core" % "6.4.1",
       "org.mariadb.jdbc" % "mariadb-java-client" % "2.6.0",
