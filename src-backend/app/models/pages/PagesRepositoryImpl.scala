@@ -11,7 +11,17 @@ class PagesRepositoryImpl extends PagesRepository {
   override def find(): Option[Pages] = ???
 
   override def upsert(pages: Pages): String = {
-    run(query[Pages].insert(lift(pages)).onConflictIgnore(_.url).returningGenerated(_.url))
+    run(
+      query[Pages]
+        .insert(lift(pages))
+        .onConflictUpdate(
+          (existingRow, newRow) => existingRow.title -> (newRow.title),
+          (existingRow, newRow) => existingRow.content -> (newRow.content),
+          (existingRow, newRow) => existingRow.publishedAt -> (newRow.publishedAt),
+          (existingRow, newRow) => existingRow.updatedAt -> (newRow.updatedAt)
+        )
+    )
+    pages.url // TODO: MariaDB can not use returning
   }
 
 }
