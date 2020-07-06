@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject.Inject
-import models.pages.Pages
+import models.pages.PageRequest
 import play.api.mvc._
 import play.api.libs.circe
 import services.PagesService
@@ -19,7 +19,7 @@ class PageController @Inject()(controllerComponents: ControllerComponents, pages
   }
 
   // TODO: Auth(with Action), IpFilter(With Action), replace ignore Chars(with Action)
-  def upsert: Action[Pages] = Action(circe.json[Pages]) { implicit request =>
+  def upsert: Action[PageRequest] = Action(circe.json[PageRequest]) { implicit request =>
     Ok("{\"status\":\"todo - post\"}").as(JSON)
   }
 }
