@@ -5,10 +5,9 @@ import scala.concurrent.Future
 trait PagesRepository {
 
   // TODO: Argument
-  def find(): Future[Option[Pages]]
+  def find(): Option[Pages]
 
-  def insert(page: Pages): Future[Option[Pages]]
-
-  def update(page: Pages): Future[Option[Pages]]
+  // return URL
+  def upsert(page: Pages): String
 
 }

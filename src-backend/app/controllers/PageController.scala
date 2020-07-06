@@ -20,6 +20,7 @@ class PageController @Inject()(controllerComponents: ControllerComponents, pages
 
   // TODO: Auth(with Action), IpFilter(With Action), replace ignore Chars(with Action)
   def upsert: Action[PageRequest] = Action(circe.json[PageRequest]) { implicit request =>
+    pagesService.upsert(request.body)
     Ok("{\"status\":\"todo - post\"}").as(JSON)
   }
 }

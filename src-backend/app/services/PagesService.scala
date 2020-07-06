@@ -1,18 +1,14 @@
 package services
 
-import models.pages.{Pages, PagesRepository}
-
-import scala.concurrent.Future
+import models.pages.{PageRequest, Pages, PagesRepository}
 
 class PagesService(pagesRepository: PagesRepository) {
 
   // TODO
-  def find: Future[Option[Pages]] = pagesRepository.find()
+  def find: Option[Pages] = pagesRepository.find()
 
-  // TODO
-  def insert(page: Pages): Future[Option[Pages]] = pagesRepository.insert(page)
-
-  // TODO
-  def update(page: Pages): Future[Option[Pages]] = pagesRepository.update(page)
+  def upsert(page: PageRequest): String = {
+    pagesRepository.upsert(Pages(page.url, page.title, page.content, page.publishedAt, page.updatedAt))
+  }
 
 }
