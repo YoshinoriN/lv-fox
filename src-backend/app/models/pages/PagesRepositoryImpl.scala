@@ -1,10 +1,8 @@
 package models.pages
 
-import scala.concurrent.Future
-import infrastracture.DataBaseContext.ctx
+import infrastracture.DataBaseContext
 
-// class PagesRepositoryImpl extends PagesRepository with DataBaseContext <- ??????
-class PagesRepositoryImpl extends PagesRepository {
+class PagesRepositoryImpl extends PagesRepository with DataBaseContext {
 
   import ctx._
 
