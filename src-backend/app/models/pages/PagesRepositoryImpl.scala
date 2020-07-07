@@ -10,7 +10,7 @@ class PagesRepositoryImpl extends PagesRepository {
 
   override def find(): Option[Pages] = ???
 
-  override def upsert(pages: Pages): String = {
+  override def upsert(pages: Pages): Pages = {
     run(
       query[Pages]
         .insert(lift(pages))
@@ -21,7 +21,7 @@ class PagesRepositoryImpl extends PagesRepository {
           (existingRow, newRow) => existingRow.updatedAt -> (newRow.updatedAt)
         )
     )
-    pages.url // TODO: MariaDB can not use returning
+    pages // TODO: MariaDB can not use returning
   }
 
 }

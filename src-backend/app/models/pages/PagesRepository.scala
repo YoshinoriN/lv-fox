@@ -8,6 +8,6 @@ trait PagesRepository {
   def find(): Option[Pages]
 
   // return URL
-  def upsert(page: Pages): String
+  def upsert(page: Pages): Pages
 
 }
