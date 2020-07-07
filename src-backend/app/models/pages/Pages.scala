@@ -38,3 +38,25 @@ object PageRequest {
       updatedAt
     )
 }
+
+final case class PageResponse(
+  url: String,
+  title: String,
+  content: String,
+  publishedAt: Long,
+  updatedAt: Long
+)
+
+object PageResponse {
+  implicit val encodeComment: Encoder[PageResponse] = deriveEncoder[PageResponse]
+  implicit val encodeComments: Encoder[List[PageResponse]] = Encoder.encodeList[PageResponse]
+
+  def apply(url: String, title: String, content: String, publishedAt: Long, updatedAt: Long): PageResponse =
+    new PageResponse(
+      url,
+      title,
+      content, // TODO: substr
+      publishedAt,
+      updatedAt
+    )
+}

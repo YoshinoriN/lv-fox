@@ -6,10 +6,15 @@ class PagesRepositoryImpl extends PagesRepository with DataBaseContext {
 
   import ctx._
 
-  override def find(): Option[Pages] = ???
+  override def find(word: String): Seq[Pages] = {
+    ctx.run(
+      query[Pages]
+        .filter(p => p.content like lift(s"%$word%"))
+    )
+  }
 
   override def upsert(pages: Pages): Pages = {
-    run(
+    ctx.run(
       query[Pages]
         .insert(lift(pages))
         .onConflictUpdate(

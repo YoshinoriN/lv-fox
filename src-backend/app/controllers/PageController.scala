@@ -14,7 +14,11 @@ class PageController @Inject()(controllerComponents: ControllerComponents, pages
 
   // TODO: CORS, Auth(with Action)
   def search(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok("{\"status\":\"todo - get\"}").as(JSON)
+    request.getQueryString("q") match {
+      case Some(word) => Ok(pagesService.find(word).asJson).as(JSON)
+      case _ => NotFound
+    }
+
   }
 
   // TODO: Auth(with Action), IpFilter(With Action), replace ignore Chars(with Action)
