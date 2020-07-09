@@ -13,10 +13,10 @@ class PageController @Inject()(controllerComponents: ControllerComponents, pages
     with Circe {
 
   // TODO: CORS, Auth(with Action)
-  def search(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    request.getQueryString("q") match {
-      case Some(word) => Ok(pagesService.find(word).asJson).as(JSON)
-      case _ => NotFound
+  def search(q: List[String]): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    q.size match {
+      case 0 => NotFound
+      case _ => Ok(pagesService.find(q).asJson).as(JSON)
     }
 
   }
