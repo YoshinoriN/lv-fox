@@ -31,7 +31,6 @@ class PagesService(pagesRepository: PagesRepository) {
   @tailrec
   private def createNewSeq(indexes: Seq[(Int, Int)], acc: Seq[(Int, Int)] = Nil): Seq[(Int, Int)] = {
     if (indexes.nonEmpty) {
-
       val i = indexes.head
       indexes.lift(1) match {
         case None =>
@@ -52,7 +51,6 @@ class PagesService(pagesRepository: PagesRepository) {
 
   @tailrec
   private def substrRecursively(sentence: String, indexes: Seq[(Int, Int)], current: Int = 0, acc: String = ""): String = {
-    println(acc)
     if (indexes.size > current) {
       val i = indexes(current)
       substrRecursively(
