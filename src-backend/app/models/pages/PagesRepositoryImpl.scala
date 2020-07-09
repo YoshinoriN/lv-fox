@@ -2,15 +2,20 @@ package models.pages
 
 import infrastracture.DataBaseContext.ctx
 
+import scala.annotation.tailrec
+
 class PagesRepositoryImpl extends PagesRepository {
 
   import ctx._
 
-  override def find(word: String): Seq[Pages] = {
-    ctx.run(
+  override def find(words: List[String]): Seq[Pages] = {
+    val q = queryBuilder(
+      words.tail,
+      0,
       query[Pages]
-        .filter(p => p.content like lift(s"%$word%"))
+        .filter(p => p.content like lift(s"%${words.head}%"))
     )
+    ctx.run(q)
   }
 
   override def upsert(pages: Pages): Pages = {
@@ -25,6 +30,20 @@ class PagesRepositoryImpl extends PagesRepository {
         )
     )
     pages // TODO: MariaDB can not use returning
+  }
+
+  @tailrec
+  private def queryBuilder(words: List[String], idx: Int = 0, acc: Quoted[Query[Pages]]): Quoted[Query[Pages]] = {
+    words.lift(idx) match {
+      case None => acc
+      case Some(w) =>
+        queryBuilder(
+          words,
+          idx + 1,
+          acc
+            .filter(p => p.content like lift(s"%$w%"))
+        )
+    }
   }
 
 }

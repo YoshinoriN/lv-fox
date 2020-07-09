@@ -8,7 +8,7 @@ class PagesService(pagesRepository: PagesRepository) {
 
   def find(words: List[String]): Seq[PageResponse] = {
     pagesRepository
-      .find(words.head)
+      .find(words)
       .map(
         page =>
           PageResponse(
