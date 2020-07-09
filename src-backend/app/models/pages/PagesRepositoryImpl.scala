@@ -1,8 +1,8 @@
 package models.pages
 
-import infrastracture.DataBaseContext
+import infrastracture.DataBaseContext.ctx
 
-class PagesRepositoryImpl extends PagesRepository with DataBaseContext {
+class PagesRepositoryImpl extends PagesRepository {
 
   import ctx._
 
