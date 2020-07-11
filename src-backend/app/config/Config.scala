@@ -10,4 +10,7 @@ object Config {
   val dbUser: String = config.getString("db.ctx.dataSource.user")
   val dbPassword: String = config.getString("db.ctx.dataSource.password")
 
+  val apiSearchToken: String = config.getString("api.auth.searchToken")
+  val apiPostToken: String = config.getString("api.auth.postToken")
+
 }

@@ -5,3 +5,5 @@ export LVFOX_DB_USER "root"
 export LVFOX_DB_PASSWORD "pass"
 export LVFOX_DB_CONNECTION_TIMEOUT 30000
 export LVFOX_DB_MAXIMUM_POOLSIZE 6
+export LVFOX_SEARCH_TOKEN "test-search-token"
+export LVFOX_POST_TOKEN "test-post-token"
