@@ -9,11 +9,10 @@ class PagesRepositoryImpl extends PagesRepository {
   import ctx._
 
   override def find(words: List[String]): Seq[Pages] = {
-    val q = queryBuilder(
+    val q = likeQueryBuilder(
       words.tail,
       0,
-      query[Pages]
-        .filter(p => p.content like lift(s"%${words.head}%"))
+      query[Pages].filter(p => p.content like lift(s"%${words.head}%"))
     )
     ctx.run(q)
   }
@@ -29,19 +28,18 @@ class PagesRepositoryImpl extends PagesRepository {
           (existingRow, newRow) => existingRow.updatedAt -> (newRow.updatedAt)
         )
     )
-    pages // TODO: MariaDB can not use returning
+    pages // NOTE: MariaDB can not use returning
   }
 
   @tailrec
-  private def queryBuilder(words: List[String], idx: Int = 0, acc: Quoted[Query[Pages]]): Quoted[Query[Pages]] = {
+  private def likeQueryBuilder(words: List[String], idx: Int = 0, acc: Quoted[Query[Pages]]): Quoted[Query[Pages]] = {
     words.lift(idx) match {
       case None => acc
       case Some(w) =>
-        queryBuilder(
+        likeQueryBuilder(
           words,
           idx + 1,
-          acc
-            .filter(p => p.content like lift(s"%$w%"))
+          acc.filter(p => p.content like lift(s"%$w%"))
         )
     }
   }
