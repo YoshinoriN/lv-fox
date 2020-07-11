@@ -14,11 +14,10 @@ class PageController @Inject()(controllerComponents: ControllerComponents, pages
 
   // TODO: CORS, Auth(with Action)
   def search(q: List[String]): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    q.size match {
-      case 0 => UnprocessableEntity
-      case _ => Ok(pagesService.find(q).asJson).as(JSON)
+    pagesService.validateQueryString(q) match {
+      case Left(l) => Results.Status(l.statusCode)(l.asJson).as(JSON)
+      case Right(_) => Ok(pagesService.find(q).asJson).as(JSON)
     }
-
   }
 
   // TODO: Auth(with Action), IpFilter(With Action), replace ignore Chars(with Action)

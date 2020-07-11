@@ -1,14 +1,26 @@
 package services
 
+import models.ErrorResponse
 import models.pages.{PageRequest, PageResponse, Pages, PagesRepository}
+import play.api.mvc.{AnyContent, Request}
+import utils.StringOps._
 
 import scala.annotation.tailrec
 
 class PagesService(pagesRepository: PagesRepository) {
 
+  def validateQueryString(qs: List[String]): Either[ErrorResponse, Unit] = {
+    for (s <- qs) {
+      if (s.trim.length < 2) return Left(ErrorResponse(422, "INVALID_CHAR_LENGTH_TOO_SHORT", "must be more 3 characters."))
+      if (s.trim.length > 15) return Left(ErrorResponse(422, "INVALID_CHAR_LENGTH_TOO_LONG", "must be less than 15 characters."))
+      if (s.trim.hasIgnoreChars) return Left(ErrorResponse(422, "INVALID_CHARS_INCLUDED", "invalid chars are included."))
+    }
+    Right()
+  }
+
   def find(words: List[String]): Seq[Pages] = {
     pagesRepository
-      .find(words)
+      .find(words.map(x => x.filterIgnoreChars))
       .map(
         page =>
           Pages(
