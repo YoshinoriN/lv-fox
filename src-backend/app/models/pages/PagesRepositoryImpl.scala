@@ -11,7 +11,7 @@ class PagesRepositoryImpl extends PagesRepository {
   override def find(words: List[String]): Seq[Pages] = {
     val q = queryBuilder(
       words.tail,
-      1,
+      0,
       query[Pages]
         .filter(p => p.content like lift(s"%${words.head}%"))
     )
