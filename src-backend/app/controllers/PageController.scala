@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject.Inject
-import models.pages.PageRequest
+import models.pages.{PageRequest, Pages}
 import play.api.mvc._
 import io.circe.syntax._
 import services.PagesService
@@ -15,7 +15,7 @@ class PageController @Inject()(controllerComponents: ControllerComponents, pages
   // TODO: CORS, Auth(with Action)
   def search(q: List[String]): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     q.size match {
-      case 0 => NotFound
+      case 0 => UnprocessableEntity
       case _ => Ok(pagesService.find(q).asJson).as(JSON)
     }
 
@@ -23,7 +23,7 @@ class PageController @Inject()(controllerComponents: ControllerComponents, pages
 
   // TODO: Auth(with Action), IpFilter(With Action), replace ignore Chars(with Action)
   def upsert: Action[PageRequest] = Action(circe.json[PageRequest]) { implicit request =>
-    val result = pagesService.upsert(request.body)
+    val result = pagesService.upsert(Pages(request.body.url, request.body.title, request.body.content, request.body.publishedAt, request.body.updatedAt))
     Created(result.asJson).as(JSON)
   }
 }

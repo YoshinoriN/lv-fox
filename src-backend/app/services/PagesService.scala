@@ -6,12 +6,12 @@ import scala.annotation.tailrec
 
 class PagesService(pagesRepository: PagesRepository) {
 
-  def find(words: List[String]): Seq[PageResponse] = {
+  def find(words: List[String]): Seq[Pages] = {
     pagesRepository
       .find(words)
       .map(
         page =>
-          PageResponse(
+          Pages(
             page.url,
             page.title,
             substrRecursively(page.content, createNewSeq(getAllWordsPosition(words, page.content))),
@@ -21,8 +21,8 @@ class PagesService(pagesRepository: PagesRepository) {
       )
   }
 
-  def upsert(page: PageRequest): Pages = {
-    pagesRepository.upsert(Pages(page.url, page.title, page.content, page.publishedAt, page.updatedAt))
+  def upsert(page: Pages): Pages = {
+    pagesRepository.upsert(page)
   }
 
   private def getAllWordsPosition(words: List[String], sentence: String): Seq[(Int, Int)] =
