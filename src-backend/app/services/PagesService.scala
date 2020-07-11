@@ -10,9 +10,10 @@ import scala.annotation.tailrec
 class PagesService(pagesRepository: PagesRepository) {
 
   def validateQueryString(qs: List[String]): Either[ErrorResponse, Unit] = {
+    if (qs.size > 3) return Left(ErrorResponse(422, "TOO_MANY_QUERY_PARAMS", "query params must be less than 4."))
     for (s <- qs) {
-      if (s.trim.length < 2) return Left(ErrorResponse(422, "INVALID_CHAR_LENGTH_TOO_SHORT", "must be more 3 characters."))
-      if (s.trim.length > 15) return Left(ErrorResponse(422, "INVALID_CHAR_LENGTH_TOO_LONG", "must be less than 15 characters."))
+      if (s.trim.length < 2) return Left(ErrorResponse(422, "CHAR_LENGTH_TOO_SHORT", "must be more 3 characters."))
+      if (s.trim.length > 15) return Left(ErrorResponse(422, "CHAR_LENGTH_TOO_LONG", "must be less than 15 characters."))
       if (s.trim.hasIgnoreChars) return Left(ErrorResponse(422, "INVALID_CHARS_INCLUDED", "invalid chars are included."))
     }
     Right()
