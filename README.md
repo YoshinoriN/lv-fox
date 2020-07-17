@@ -82,7 +82,7 @@ $ sbt run
 `lv-fox` requier access token. Please set belows to your enviroment variables.
 
 |Property|Description|Type|Default|
-|---|---|---|---|---|
+|---|---|---|---|
 |`LVFOX_SEARCH_TOKEN `|access token for search api|`string`|-|
 |`LVFOX_POST_TOKEN `|access token for POST api|`string`|-|
 
