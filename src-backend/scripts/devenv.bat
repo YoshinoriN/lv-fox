@@ -5,3 +5,4 @@ setx LVFOX_DB_CONNECTION_TIMEOUT 30000
 setx LVFOX_DB_MAXIMUM_POOLSIZE 6
 setx LVFOX_SEARCH_TOKEN "test-search-token"
 setx LVFOX_POST_TOKEN "test-post-token"
+setx LVFOX_APPLICATION_SECRET "secretpleasechangeme"
