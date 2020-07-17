@@ -17,7 +17,6 @@ WORKDIR /usr/opt/lv-fox
 
 RUN rm -rf .git docs \
   && rm .gitignore .editorconfig LICENSE README.md \
-  && pwd && ls -la \
   && mv src-backend/* . \
   && rm -rf scripts \
   && rm -rf src-backend docker \
