@@ -1,8 +1,7 @@
 package services
 
 import models.ErrorResponse
-import models.pages.{PageRequest, PageResponse, Pages, PagesRepository}
-import play.api.mvc.{AnyContent, Request}
+import models.pages.{Pages, PagesRepository}
 import utils.StringOps._
 
 import scala.annotation.tailrec
