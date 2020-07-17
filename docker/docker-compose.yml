@@ -32,5 +32,4 @@ services:
     container_name: lvfox
     ports:
       - "9000:9000"
-    # TODO:
-    command: ["sbt", "run"]
+    command: ["sh", "lv-fox"]

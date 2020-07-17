@@ -20,4 +20,6 @@ RUN rm -rf .git docs \
   && mv src-backend/* . \
   && rm -rf scripts \
   && rm -rf src-backend docker \
-  && sbt clean stage
+  && sbt clean stage exit
+
+WORKDIR /usr/opt/lv-fox/target/universal/stage/bin
