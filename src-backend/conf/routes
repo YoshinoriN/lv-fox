@@ -1,5 +1,4 @@
 GET     /                           controllers.StatusController.index
 GET     /search                     controllers.PageController.search(q: List[String])
-
-+nocsrf # TODO
++nocsrf
 POST    /page                       controllers.PageController.upsert
