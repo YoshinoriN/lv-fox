@@ -9,6 +9,10 @@
 * JVM 11
 * MariaDB 10.x
 
+## Documentation
+
+* [API](https://yoshinorin.github.io/lv-fox/)
+
 ## Set up
 
 <details>
@@ -108,6 +112,8 @@ $ curl -D - -X POST -H "Authorization: Bearer 123456789" -H "Content-Type: appli
 |[MariaDB](https://mariadb.org/)|Database|
 |[ScalaTest](http://www.scalatest.org/)|Unit test|
 |[Scalafmt](https://scalameta.org/scalafmt/)|Code formatter|
+|[ReDoc](https://github.com/Rebilly/ReDoc)|Generate API documentation |
+|[GitHub Pages](https://pages.github.com/)|Hosting API docuementation|
 
 
 # License
