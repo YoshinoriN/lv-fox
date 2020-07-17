@@ -1,0 +1,16 @@
+{
+  "name": "lv-fox",
+  "version": "1.0.0",
+  "description": "API document for cahsper",
+  "main": "index.js",
+  "author": "YoshinoriN",
+  "scripts": {
+    "build": "redoc-cli bundle openapi.yml -o ./dist/index.html",
+    "publish": "npm run build && cd dist && git checkout gh-pages && git commit index.html -m \"update api document\" && git push",
+    "serve": "redoc-cli serve openapi.yml"
+  },
+  "devDependencies": {
+    "redoc-cli": "0.9.8"
+  },
+  "dependencies": {}
+}
