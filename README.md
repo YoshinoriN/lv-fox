@@ -1,6 +1,6 @@
 # lv-fox (WIP)
 
-`lv-fox` is search API server for [my blog](https://yoshinorin.net/). I call this project `love・fox`.
+`lv-fox` is search API server for [my blog](https://yoshinorin.net/). I call this project `love - fox`.
 
 ## Requirements
 
