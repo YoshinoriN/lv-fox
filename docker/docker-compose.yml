@@ -1,6 +1,6 @@
 version: '3'
 services:
-  mariadb:
+  lvfox_mariadb:
     image: yoshinorin/docker-mariadb:10.5.4
     environment:
       MYSQL_ROOT_PASSWORD: pass
@@ -10,7 +10,11 @@ services:
     volumes:
       - ./data:/var/lib/mysql
     hostname: lvfox-mariadb
+    networks:
+      - lvfox
     container_name: lvfox-mariadb
+    expose:
+      - "3306"
     ports:
       - "3306:3306"
     command: ["mysqld", "--character-set-server=utf8mb4"]
@@ -29,7 +33,14 @@ services:
     volumes:
       - ./logs:/usr/opt/lv-fox/logs
     hostname: lvfox
+    networks:
+      - lvfox
     container_name: lvfox
     ports:
       - "9000:9000"
     command: ["sh", "lv-fox"]
+    depends_on:
+      - lvfox_mariadb
+
+networks:
+  lvfox:
