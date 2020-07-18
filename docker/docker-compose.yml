@@ -29,6 +29,7 @@ services:
       LVFOX_POST_TOKEN: test-post-token
       LVFOX_CORS_ALLOW_ORIGIN: null
       LVFOX_APPLICATION_SECRET: secretpleasechangeme
+      LVFOX_ALLOW_HOST: your-domain
       SBT_OPTS: "-Xms512M -Xmx768M -Xss2M"
     volumes:
       - ./logs:/usr/opt/lv-fox/logs

@@ -80,6 +80,7 @@ $ sbt run
 |---|---|
 |`LVFOX_APPLICATION_SECRET`|[Play Framework - application secret](https://www.playframework.com/documentation/2.8.x/Deploying#The-application-secret)|
 |`LVFOX_CORS_ALLOW_ORIGIN`|[Play Framework - Configuring the CORS filter](https://www.playframework.com/documentation/2.8.x/CorsFilter#Configuring-the-CORS-filter)|
+|`LVFOX_ALLOW_HOST `|[Play Framework - Allowed hosts filter](https://www.playframework.com/documentation/2.8.x/AllowedHostsFilter)|`string`|-|
 
 ### Authentication
 
