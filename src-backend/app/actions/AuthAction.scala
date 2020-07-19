@@ -13,14 +13,14 @@ class PostAuthAction(implicit exContext: ExecutionContext) extends ActionRefiner
 
     request.headers.get("Authorization") match {
       case None =>
-        logger.error(s"missing auth token: ${request.remoteAddress}")
+        logger.error(s"${request.uri} ${request.remoteAddress}: missing auth token")
         Future(Left(Results.Unauthorized.as(MimeTypes.JSON)))
       case Some(token) =>
         if (token.replaceAll("Bearer", "").trim == Config.apiPostToken) {
-          logger.info(s"authentication succeeded: ${request.remoteAddress}")
+          logger.info(s"${request.uri} ${request.remoteAddress}: authentication succeeded")
           Future(Right(request))
         } else {
-          logger.error(s"authentication failed: ${request.remoteAddress}")
+          logger.error(s"${request.uri} ${request.remoteAddress}: authentication failed")
           Future(Left(Results.Unauthorized.as(MimeTypes.JSON)))
         }
     }
@@ -37,14 +37,14 @@ class SearchAuthAction(implicit exContext: ExecutionContext) extends ActionRefin
 
     request.headers.get("Authorization") match {
       case None =>
-        logger.error(s"missing auth token: ${request.remoteAddress}")
+        logger.error(s"${request.uri} ${request.remoteAddress}: missing auth token")
         Future(Left(Results.Unauthorized.as(MimeTypes.JSON)))
       case Some(token) =>
         if (token.replaceAll("Bearer", "").trim == Config.apiSearchToken) {
-          logger.info(s"authentication succeeded: ${request.remoteAddress}")
+          logger.info(s"${request.uri} ${request.remoteAddress}: authentication succeeded")
           Future(Right(request))
         } else {
-          logger.error(s"authentication failed: ${request.remoteAddress}")
+          logger.error(s"${request.uri} ${request.remoteAddress}: authentication failed")
           Future(Left(Results.Unauthorized.as(MimeTypes.JSON)))
         }
     }

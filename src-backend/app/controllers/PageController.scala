@@ -18,7 +18,7 @@ class PageController @Inject()(controllerComponents: ControllerComponents, actio
   def search(q: List[String]): Action[AnyContent] = actions.searchAuth { implicit request: Request[AnyContent] =>
     pagesService.validateQueryString(q) match {
       case Left(l) => {
-        logger.error(s"${request.remoteAddress}: ${l.asJson.toString}")
+        logger.error(s"${request.uri} ${request.remoteAddress}: ${l.asJson.toString.replaceAll("\n", "").replaceAll(" ", "")}")
         Results.Status(l.statusCode)(l.asJson).as(JSON)
       }
       case Right(_) => {
@@ -30,6 +30,7 @@ class PageController @Inject()(controllerComponents: ControllerComponents, actio
 
   def upsert: Action[PageRequest] = Action(circe.json[PageRequest]).andThen(actions.postAuth) { implicit request =>
     val result = pagesService.upsert(Pages(request.body.url, request.body.title, request.body.content, request.body.publishedAt, request.body.updatedAt))
+    logger.info(s"${request.uri} ${request.remoteAddress}: ${result.url}")
     Created(result.asJson).as(JSON)
   }
 }
