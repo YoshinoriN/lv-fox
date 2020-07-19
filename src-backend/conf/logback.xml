@@ -11,6 +11,10 @@
             <charset>UTF-8</charset>
             <pattern>%date{yyyy-MM-dd HH:mm:ss ZZZZ} [%level] from %logger - %message%n%xException</pattern>
         </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>DENY</onMatch>
+        </filter>
     </appender>
 
     <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
