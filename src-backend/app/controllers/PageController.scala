@@ -7,17 +7,24 @@ import play.api.mvc._
 import io.circe.syntax._
 import services.PagesService
 import io.circe.generic.auto._
+import play.api.Logging
 import play.api.libs.circe.Circe
 
 class PageController @Inject()(controllerComponents: ControllerComponents, actions: Actions, pagesService: PagesService)
     extends AbstractController(controllerComponents)
-    with Circe {
+    with Circe
+    with Logging {
 
-  // TODO: CORS, DDos protection
   def search(q: List[String]): Action[AnyContent] = actions.searchAuth { implicit request: Request[AnyContent] =>
     pagesService.validateQueryString(q) match {
-      case Left(l) => Results.Status(l.statusCode)(l.asJson).as(JSON)
-      case Right(_) => Ok(pagesService.find(q).asJson).as(JSON)
+      case Left(l) => {
+        logger.error(s"${request.remoteAddress}: ${l.asJson.toString}")
+        Results.Status(l.statusCode)(l.asJson).as(JSON)
+      }
+      case Right(_) => {
+        logger.info(s"${request.remoteAddress}: ${q}")
+        Ok(pagesService.find(q).asJson).as(JSON)
+      }
     }
   }
 
