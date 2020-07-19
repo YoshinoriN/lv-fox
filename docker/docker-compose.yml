@@ -32,7 +32,7 @@ services:
       LVFOX_ALLOW_HOST: your-domain
       SBT_OPTS: "-Xms512M -Xmx768M -Xss2M"
     volumes:
-      - ./logs:/usr/opt/lv-fox/logs
+      - ./logs:/usr/opt/lv-fox/target/universal/stage/bin/logs
     hostname: lvfox
     networks:
       - lvfox
