@@ -13,14 +13,14 @@ import services.PagesService
 
 class LvFoxComponents(context: ApplicationLoader.Context) extends BuiltInComponentsFromContext(context) with HttpFiltersComponents {
 
-  private val errorHandler = new ErrorHandler
-  private val postAuthAction = new PostAuthAction()
-  private val postIpFilterAuthAction = new PostIpFilterAction()
-  private val searchAuthAction = new SearchAuthAction()
-  private val actions = new Actions(postAuthAction, postIpFilterAuthAction, searchAuthAction, defaultActionBuilder)
-  private val pagesService = new PagesService(new PagesRepositoryImpl)
-  private val statusController: StatusController = new StatusController(controllerComponents)
-  private val pageController: PageController = new PageController(controllerComponents, actions, pagesService)
+  lazy val errorHandler = new ErrorHandler
+  lazy val postAuthAction = new PostAuthAction()
+  lazy val postIpFilterAuthAction = new PostIpFilterAction()
+  lazy val searchAuthAction = new SearchAuthAction()
+  lazy val actions = new Actions(postAuthAction, postIpFilterAuthAction, searchAuthAction, defaultActionBuilder)
+  lazy val pagesService = new PagesService(new PagesRepositoryImpl)
+  lazy val statusController: StatusController = new StatusController(controllerComponents)
+  lazy val pageController: PageController = new PageController(controllerComponents, actions, pagesService)
 
   override def router: Router = new Routes(
     errorHandler,
