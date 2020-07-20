@@ -90,6 +90,7 @@ $ sbt run
 |---|---|---|---|
 |`LVFOX_SEARCH_TOKEN `|access token for search api|`string`|-|
 |`LVFOX_POST_TOKEN `|access token for POST api|`string`|-|
+|`LVFOX_POST_IP_FILTER `|Specify allow ip address when POST page|`string`|`0.0.0.0`|
 
 ## API Execute examples
 

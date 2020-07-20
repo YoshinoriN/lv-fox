@@ -1,6 +1,6 @@
 package components
 
-import actions.{Actions, PostAuthAction, SearchAuthAction}
+import actions.{Actions, PostAuthAction, PostIpFilterAction, SearchAuthAction}
 import controllers.{PageController, StatusController}
 import models.pages.PagesRepositoryImpl
 import modules.ErrorHandler
@@ -15,8 +15,9 @@ class LvFoxComponents(context: ApplicationLoader.Context) extends BuiltInCompone
 
   private val errorHandler = new ErrorHandler
   private val postAuthAction = new PostAuthAction()
+  private val postIpFilterAuthAction = new PostIpFilterAction()
   private val searchAuthAction = new SearchAuthAction()
-  private val actions = new Actions(postAuthAction, searchAuthAction, defaultActionBuilder)
+  private val actions = new Actions(postAuthAction, postIpFilterAuthAction, searchAuthAction, defaultActionBuilder)
   private val pagesService = new PagesService(new PagesRepositoryImpl)
   private val statusController: StatusController = new StatusController(controllerComponents)
   private val pageController: PageController = new PageController(controllerComponents, actions, pagesService)

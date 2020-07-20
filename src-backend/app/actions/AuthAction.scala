@@ -57,3 +57,25 @@ class SearchAuthAction(implicit exContext: ExecutionContext) extends ActionRefin
   override protected def executionContext: ExecutionContext = exContext
 
 }
+
+class PostIpFilterAction(implicit exContext: ExecutionContext) extends ActionRefiner[Request, Request] with Logging with Network {
+
+  override protected def refine[A](request: Request[A]): Future[Either[Result, Request[A]]] = {
+
+    if (Config.apiPostIpFilter == "0.0.0.0") {
+      Future(Right(request))
+    } else {
+      val clientIp = getIpAddress(request)
+      if (clientIp == Config.apiPostIpFilter) {
+        Future(Right(request))
+      } else {
+        logger.error(s"${clientIp} - ${request.uri}: access denied")
+        Future(Left(Results.Unauthorized.as(MimeTypes.JSON)))
+      }
+    }
+
+  }
+
+  override protected def executionContext: ExecutionContext = exContext
+
+}

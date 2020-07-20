@@ -13,4 +13,6 @@ object Config {
   val apiSearchToken: String = config.getString("api.auth.searchToken")
   val apiPostToken: String = config.getString("api.auth.postToken")
 
+  val apiPostIpFilter: String = config.getString("api.ip.postIpFilter")
+
 }
