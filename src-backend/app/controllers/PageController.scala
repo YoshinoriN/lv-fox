@@ -21,11 +21,11 @@ class PageController @Inject()(controllerComponents: ControllerComponents, actio
     val clientIp = getIpAddress(request)
     pagesService.validateQueryString(q) match {
       case Left(l) => {
-        logger.error(s"${request.uri} ${clientIp}: ${l.asJson.toString.replaceAll("\n", "").replaceAll(" ", "")}")
+        logger.error(s"${clientIp} - ${request.uri}: ${l.asJson.toString.replaceAll("\n", "").replaceAll(" ", "")}")
         Results.Status(l.statusCode)(l.asJson).as(JSON)
       }
       case Right(_) => {
-        logger.info(s"${clientIp}: ${q}")
+        logger.info(s"${clientIp} - ${request.uri}: ${q}")
         Ok(pagesService.find(q).asJson).as(JSON)
       }
     }
@@ -34,7 +34,7 @@ class PageController @Inject()(controllerComponents: ControllerComponents, actio
   def upsert: Action[PageRequest] = Action(circe.json[PageRequest]).andThen(actions.postAuth) { implicit request =>
     val clientIp = getIpAddress(request)
     val result = pagesService.upsert(Pages(request.body.url, request.body.title, request.body.content, request.body.publishedAt, request.body.updatedAt))
-    logger.info(s"${request.uri} ${clientIp}: ${result.url}")
+    logger.info(s"${clientIp} - ${request.uri}: ${result.url}")
     Created(result.asJson).as(JSON)
   }
 }

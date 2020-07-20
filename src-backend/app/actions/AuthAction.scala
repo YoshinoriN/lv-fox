@@ -15,14 +15,14 @@ class PostAuthAction(implicit exContext: ExecutionContext) extends ActionRefiner
     val clientIp = getIpAddress(request)
     request.headers.get("Authorization") match {
       case None =>
-        logger.error(s"${request.uri} ${clientIp}: missing auth token")
+        logger.error(s"${clientIp} - ${request.uri}: missing auth token")
         Future(Left(Results.Unauthorized.as(MimeTypes.JSON)))
       case Some(token) =>
         if (token.replaceAll("Bearer", "").trim == Config.apiPostToken) {
-          logger.info(s"${request.uri} ${clientIp}: authentication succeeded")
+          logger.info(s"${clientIp} - ${request.uri}: authentication succeeded")
           Future(Right(request))
         } else {
-          logger.error(s"${request.uri} ${clientIp}: authentication failed")
+          logger.error(s"${clientIp} - ${request.uri}}: authentication failed")
           Future(Left(Results.Unauthorized.as(MimeTypes.JSON)))
         }
     }
@@ -40,14 +40,14 @@ class SearchAuthAction(implicit exContext: ExecutionContext) extends ActionRefin
     val clientIp = getIpAddress(request)
     request.headers.get("Authorization") match {
       case None =>
-        logger.error(s"${request.uri} ${clientIp}: missing auth token")
+        logger.error(s"${clientIp} - ${request.uri}: missing auth token")
         Future(Left(Results.Unauthorized.as(MimeTypes.JSON)))
       case Some(token) =>
         if (token.replaceAll("Bearer", "").trim == Config.apiSearchToken) {
-          logger.info(s"${request.uri} ${clientIp}: authentication succeeded")
+          logger.info(s"${clientIp} - ${request.uri}}: authentication succeeded")
           Future(Right(request))
         } else {
-          logger.error(s"${request.uri} ${clientIp}: authentication failed")
+          logger.error(s"${clientIp} - ${request.uri}: authentication failed")
           Future(Left(Results.Unauthorized.as(MimeTypes.JSON)))
         }
     }
