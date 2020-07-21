@@ -8,6 +8,7 @@ import play.api.mvc.EssentialFilter
 import play.api.routing.Router
 import play.api.{ApplicationLoader, BuiltInComponentsFromContext}
 import play.filters.HttpFiltersComponents
+import play.filters.cors.{CORSConfig, CORSFilter}
 import router.Routes
 import services.PagesService
 
@@ -28,5 +29,8 @@ class LvFoxComponents(context: ApplicationLoader.Context) extends BuiltInCompone
     pageController
   )
 
-  override def httpFilters: Seq[EssentialFilter] = super.httpFilters
+  lazy val corsConfig = CORSConfig.fromConfiguration(configuration)
+  lazy val corsFilter: CORSFilter = new CORSFilter(corsConfig, errorHandler, Seq("/"))
+
+  override def httpFilters: Seq[EssentialFilter] = Seq(corsFilter, securityHeadersFilter, allowedHostsFilter)
 }

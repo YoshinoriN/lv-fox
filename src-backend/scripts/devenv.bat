@@ -7,4 +7,4 @@ setx LVFOX_SEARCH_TOKEN "test-search-token"
 setx LVFOX_POST_TOKEN "test-post-token"
 setx LVFOX_POST_IP_FILTER "0.0.0.0"
 setx LVFOX_APPLICATION_SECRET "secretpleasechangeme"
-
+setx LVFOX_CORS_ALLOW_ORIGIN "http://localhost:4000"
