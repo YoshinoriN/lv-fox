@@ -33,7 +33,7 @@ object PageRequest {
     new PageRequest(
       url,
       title,
-      content.stripHtmlTags.stripHtmlSpecialChars.replaceAll("\n", "").replaceAll(" ", ""),
+      content.stripHtmlTags.replaceAll("\n", ""),
       publishedAt,
       updatedAt
     )
