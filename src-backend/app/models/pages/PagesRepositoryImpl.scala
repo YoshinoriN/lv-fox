@@ -14,7 +14,7 @@ class PagesRepositoryImpl extends PagesRepository {
       0,
       query[Pages].filter(p => p.content like lift(s"%${words.head}%"))
     )
-    ctx.run(q.take(30))
+    ctx.run(q.sortBy(p => p.publishedAt)(Ord.descNullsLast).take(30))
   }
 
   override def upsert(pages: Pages): Pages = {
