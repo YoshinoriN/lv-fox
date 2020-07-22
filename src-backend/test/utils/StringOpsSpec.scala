@@ -16,6 +16,15 @@ class StringOpsSpec extends PlaySpec {
 
   }
 
+  "StringOps - stripHtmlSpecialChars" should {
+
+    "replace all html special chars" in {
+      val x = "a&amp;b&#38;c&#169;d&#x27;e&quot;f&#xA0;g&lt;h&gt;i&quot;j".stripHtmlSpecialChars
+      x mustBe "abcdefghij"
+    }
+
+  }
+
   "StringOps - hasIgnoreChars" should {
 
     "detected ignore chars" in {
