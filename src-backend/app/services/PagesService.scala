@@ -26,7 +26,7 @@ class PagesService(pagesRepository: PagesRepository) {
           Pages(
             page.url,
             page.title,
-            substrRecursively(page.content, createNewSeq(getAllWordsPosition(words, page.content))),
+            substrRecursively(page.content, createNewSeq(getAllWordsPosition(words.map(x => x.toLowerCase), page.content.toLowerCase))),
             page.publishedAt,
             page.updatedAt
           )
