@@ -38,7 +38,7 @@ class PagesService(pagesRepository: PagesRepository) {
   }
 
   private def getAllWordsPosition(words: List[String], sentence: String): Seq[(Int, Int)] =
-    words.flatMap(_.r.findAllMatchIn(sentence).map(s => (s.start - 8, s.end + 8)).toSeq).sortBy(_._1)
+    words.flatMap(_.r.findAllMatchIn(sentence).map(s => (s.start - 8, s.end + 24)).toSeq).sortBy(_._1)
 
   @tailrec
   private def createNewSeq(idxes: Seq[(Int, Int)], acc: Seq[(Int, Int)] = Nil): Seq[(Int, Int)] = {
