@@ -10,7 +10,7 @@
     "serve": "redoc-cli serve openapi.yml"
   },
   "devDependencies": {
-    "redoc-cli": "0.9.8"
+    "redoc-cli": "0.10.4"
   },
   "dependencies": {}
 }
