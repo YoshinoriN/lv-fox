@@ -25,7 +25,7 @@ Prepare [requirements](#requirements) environment before setup.
 <details>
   <summary>Download application</summary><br>
 
-`git clone https://github.com/YoshinoriN/lv-fox.git`
+`git clone https://github.com/yoshinorin/lv-fox.git`
 
 </details>
 
@@ -56,13 +56,13 @@ $ sbt run
 
 ## Docker integration
 
-`lv-fox` provides [docker image](https://hub.docker.com/repository/docker/yoshinorin/docker-lvfox). Please see [docker-compose.yml](https://github.com/YoshinoriN/lv-fox/blob/master/docker/docker-compose.yml)
+`lv-fox` provides [docker image](https://hub.docker.com/repository/docker/yoshinorin/docker-lvfox). Please see [docker-compose.yml](https://github.com/yoshinorin/lv-fox/blob/master/docker/docker-compose.yml)
 
 ## Configuration
 
 `lv-fox` reads all settings from the system environment variable. You have to set the following system environment variables.
 
-> [Examples](https://github.com/YoshinoriN/lv-fox/blob/master/src-backend/scripts/devenv.sh)
+> [Examples](https://github.com/yoshinorin/lv-fox/blob/master/src-backend/scripts/devenv.sh)
 
 ### Database
 
